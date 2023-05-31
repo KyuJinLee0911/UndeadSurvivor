@@ -34,7 +34,7 @@ public class Monster : MonoBehaviour
     {
         if(!isAlive)
             return;
-
+        // 살아있는 동안에 플레이어를 따라다니게 함
         Vector2 _dirVec = (target.position - monsterRB.position).normalized;
         Vector2 _nextVec = _dirVec * speed * Time.fixedDeltaTime;
 
@@ -47,6 +47,7 @@ public class Monster : MonoBehaviour
         if(!isAlive)
             return;
 
+        // 살아있는 동안 캐릭터를 바라보게 함(좌우)
         Vector2 _nextDir = (target.position - monsterRB.position).normalized;
 
         if(_nextDir.x == 0)
@@ -54,6 +55,8 @@ public class Monster : MonoBehaviour
 
         spriteRenderer.flipX = (_nextDir.x < 0);
     }
+
+    // 레벨에 맞는 몬스터 데이터 설정
     public void Init(SpawnData data)
     {
         animator.runtimeAnimatorController = animCtrl[data.monsterType];
@@ -62,6 +65,7 @@ public class Monster : MonoBehaviour
         monsterHP = data.monsterHP;
     }
 
+    // 총알에 맞았을 때
     private void OnTriggerEnter2D(Collider2D other) 
     {
         if(!other.CompareTag("Bullet"))
@@ -69,12 +73,14 @@ public class Monster : MonoBehaviour
 
         monsterHP -= other.GetComponent<Bullet>().damage;
         
+        // 체력이 0보다 크면 맞는 애니메이션
         if(monsterHP > 0)
         {
             // Alive, hit action
             isAlive = true;
             animator.SetTrigger("Hit");
         }
+        // 체력이 0보다 작으면 죽음
         else
         {
             // Die

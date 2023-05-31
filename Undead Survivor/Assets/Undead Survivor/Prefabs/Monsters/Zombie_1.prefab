@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5020992391455977740}
   - component: {fileID: 5020992391455977738}
   - component: {fileID: 5020992391455977737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zombie_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5020992391455977728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2115984, y: -0.01213491, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -161,6 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  monsterHP: 0
+  maxHP: 0
+  animCtrl: []
   target: {fileID: 0}
 --- !u!114 &5020992391455977737
 MonoBehaviour:
@@ -184,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5020992391730619008}
   - component: {fileID: 5020992391730619023}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

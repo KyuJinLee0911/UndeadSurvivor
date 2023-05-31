@@ -5,9 +5,9 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
 
-    public GameObject[] prefabs;
+    public GameObject[] prefabs; // 프리팹
     
-    List<GameObject>[] pools;
+    List<GameObject>[] pools; // 각 프리팹을 담고 있는 게임오브젝트 배열의 리스트 (오브젝트 풀)
     private void Awake() 
     {
         pools = new List<GameObject>[prefabs.Length];
