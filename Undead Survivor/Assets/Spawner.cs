@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
-        GameObject _randMonster = GameManager.Instance().monsterPool.Get(0);
+        GameObject _randMonster = GameManager.Instance().poolManager.Get(0);
         _randMonster.transform.position = spawnPoints[Random.Range(1,spawnPoints.Length)].position;
         _randMonster.GetComponent<Monster>().Init(spawnData[level]);
     }
