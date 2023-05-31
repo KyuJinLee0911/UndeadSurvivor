@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     public float maxGameTIme = 20f;
     public Player player;
     public PoolManager poolManager;
-    // Start is called before the first frame update
-
+    // 싱글톤 패턴
     public static GameManager Instance()
     {
         if (!_instance)
@@ -23,17 +22,6 @@ public class GameManager : MonoBehaviour
         return _instance;
     }
 
-    private void Awake()
-    {
-
-    }
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         gameTime += Time.deltaTime;

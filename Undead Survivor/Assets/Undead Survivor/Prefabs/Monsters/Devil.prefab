@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7712763739286887217}
   - component: {fileID: 7712763739286887216}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7712763739892206475}
   - component: {fileID: 7712763739892206472}
   - component: {fileID: 7712763739892206473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Devil
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7712763739892206470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.92, y: -0.01213491, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -245,6 +245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  monsterHP: 0
+  maxHP: 0
+  animCtrl: []
   target: {fileID: 0}
 --- !u!114 &7712763739892206473
 MonoBehaviour:

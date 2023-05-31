@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Reposition : MonoBehaviour
 {
-    Collider2D collider;
+    new Collider2D collider;
 
     private void Awake() 
     {
