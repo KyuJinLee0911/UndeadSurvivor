@@ -8,14 +8,14 @@ public class GameManager : MonoBehaviour
     public float gameTime;
     public float maxGameTIme = 20f;
     public Player player;
-    public PoolManager monsterPool;
+    public PoolManager poolManager;
     // Start is called before the first frame update
 
     public static GameManager Instance()
     {
         if (!_instance)
         {
-            _instance = FindObjectOfType<GameManager>();
+            _instance = FindObjectOfType(typeof(GameManager)) as GameManager;
 
             if (_instance == null)
                 Debug.Log("No Singleton Obj");

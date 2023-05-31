@@ -61,4 +61,29 @@ public class Monster : MonoBehaviour
         maxHP = data.monsterHP;
         monsterHP = data.monsterHP;
     }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(!other.CompareTag("Bullet"))
+            return;
+
+        monsterHP -= other.GetComponent<Bullet>().damage;
+        
+        if(monsterHP > 0)
+        {
+            // Alive, hit action
+            isAlive = true;
+            animator.SetTrigger("Hit");
+        }
+        else
+        {
+            // Die
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        gameObject.SetActive(false);
+    }
 }
