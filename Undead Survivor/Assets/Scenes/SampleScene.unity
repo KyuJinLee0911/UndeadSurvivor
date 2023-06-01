@@ -480,15 +480,7 @@ GameObject:
   - component: {fileID: 286345600}
   - component: {fileID: 286345599}
   m_Layer: 5
-<<<<<<< Updated upstream
   m_Name: Slider
-=======
-<<<<<<< HEAD
-  m_Name: ExpSlider
-=======
-  m_Name: Slider
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,14 +522,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoType: 0
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  myText: {fileID: 0}
-  mySlider: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!114 &286345600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,14 +667,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoType: 1
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  myText: {fileID: 0}
-  mySlider: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!1 &311814285
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,14 +864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoType: 4
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  myText: {fileID: 0}
-  mySlider: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!114 &435500513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6200,13 +6168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48cda5cdce75c540ab81e7d3d2a1af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  rect: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!1 &1054057627
 GameObject:
   m_ObjectHideFlags: 0
@@ -14914,13 +14875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776af440f787cda43b6a89ab53369e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  expText: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!114 &1390248384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15184,14 +15138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoType: 3
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  myText: {fileID: 0}
-  mySlider: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!114 &1632214460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15411,13 +15357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776af440f787cda43b6a89ab53369e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  expText: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!1 &1700785612
 GameObject:
   m_ObjectHideFlags: 0
@@ -19862,14 +19801,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoType: 2
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  myText: {fileID: 0}
-  mySlider: {fileID: 0}
-=======
->>>>>>> 8697a59aa60b2c3ca6cbd0352add067cc55b7ffc
->>>>>>> Stashed changes
 --- !u!1 &1856936890
 GameObject:
   m_ObjectHideFlags: 0
