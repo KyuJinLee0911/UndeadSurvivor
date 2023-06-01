@@ -17,18 +17,12 @@ public class Weapon : MonoBehaviour
     private float rotateSpeed; // 근접무기 회전속도
 
     private float timer;
-    // private Player player;
-    private Scanner scanner;
+    private Player player;
 
     private void Awake()
     {
-        // player = GetComponentInParent<Player>();
-        scanner = GetComponentInParent<Scanner>();
-    }
+        player = GameManager.Instance().player;
 
-    private void Start()
-    {
-        Init();
     }
 
     void Update()
@@ -41,7 +35,7 @@ public class Weapon : MonoBehaviour
                 break;
 
             default:
-                fireSpeed = 0.3f; // 연사속도
+
 
                 timer += Time.deltaTime;
 
@@ -73,8 +67,26 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        // 기본 세팅
+        name = $"Weapon {data.itemId}";
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for (int index = 0; index < GameManager.Instance().poolManager.prefabs.Length; index++)
+        {
+            if (data.projectile == GameManager.Instance().poolManager.prefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+        // 프로퍼티 세팅
         switch (id)
         {
             case 0:
@@ -83,7 +95,7 @@ public class Weapon : MonoBehaviour
                 break;
 
             default:
-
+                fireSpeed = 0.3f; // 연사속도
                 break;
         }
     }
@@ -124,11 +136,11 @@ public class Weapon : MonoBehaviour
     void Fire()
     {
         // 몬스터가 없으면 리턴
-        if (!scanner.nearestTarget)
+        if (!player.scanner.nearestTarget)
             return;
 
         // 타겟은 가장 가까운 몬스터
-        Vector3 _targetPos = scanner.nearestTarget.position;
+        Vector3 _targetPos = player.scanner.nearestTarget.position;
         Vector3 _dir = (_targetPos - transform.position).normalized;
 
         // 오브젝트 풀을 통해 총알 생성
