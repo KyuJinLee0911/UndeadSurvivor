@@ -10,10 +10,12 @@ public class Monster : MonoBehaviour
     public RuntimeAnimatorController[] animCtrl;
     Animator animator;
     public Rigidbody2D target;
+    WaitForFixedUpdate wait;
     
 
     bool isAlive;
     private Rigidbody2D monsterRB;
+    private Collider2D monsterColl;
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
 
@@ -22,6 +24,8 @@ public class Monster : MonoBehaviour
         animator = GetComponent<Animator>();
         monsterRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        monsterColl = GetComponent<Collider2D>();
+        wait = new WaitForFixedUpdate();
     }
 
     private void OnEnable() 
@@ -29,10 +33,16 @@ public class Monster : MonoBehaviour
         target = GameManager.Instance().player.GetComponent<Rigidbody2D>();
         isAlive = true;
         monsterHP = maxHP;
+
+        // 죽을 때 설정한 것들 반대로
+        monsterColl.enabled = true;
+        monsterRB.simulated = true;
+        spriteRenderer.sortingOrder = 2;
+        animator.SetBool("Dead", false);
     }
     private void FixedUpdate() 
     {
-        if(!isAlive)
+        if(!isAlive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
         // 살아있는 동안에 플레이어를 따라다니게 함
         Vector2 _dirVec = (target.position - monsterRB.position).normalized;
@@ -68,11 +78,11 @@ public class Monster : MonoBehaviour
     // 총알에 맞았을 때
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(!other.CompareTag("Bullet"))
+        if(!other.CompareTag("Bullet") || !isAlive)
             return;
 
         monsterHP -= other.GetComponent<Bullet>().damage;
-        
+        StartCoroutine(KnockBack());
         // 체력이 0보다 크면 맞는 애니메이션
         if(monsterHP > 0)
         {
@@ -84,9 +94,27 @@ public class Monster : MonoBehaviour
         else
         {
             // Die
-            Dead();
+            isAlive = false;
+            monsterColl.enabled = false;
+            monsterRB.simulated = false;
+            spriteRenderer.sortingOrder = 1;
+            animator.SetBool("Dead", true);
+            GameManager.Instance().killCount++;
+            GameManager.Instance().GetExp();
         }
     }
+
+    IEnumerator KnockBack()
+    {
+        yield return wait; // 하나의 물리 프레임을 딜레이
+
+        Vector3 _playerPos = GameManager.Instance().player.transform.position;
+        Vector3 _dir = (transform.position - _playerPos).normalized;
+
+        monsterRB.AddForce(_dir * 3, ForceMode2D.Impulse);
+    }
+
+    
 
     void Dead()
     {
