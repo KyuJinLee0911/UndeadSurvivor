@@ -15,9 +15,7 @@ MonoBehaviour:
   itemType: 4
   itemId: 4
   itemName: "\uC74C\uB8CC\uC218"
-  itemDisc: "\uB0C9\uC7A5\uACE0\uC5D0\uC11C \uAEBC\uB0B8 \uC9C0 \uB450\uC2DC\uAC04
-    \uCBE4 \uC9C0\uB098 \uBBF8\uC9C0\uADFC\uD55C \uC74C\uB8CC\uC218. \uB9DB\uC740
-    \uC5C6\uC9C0\uB9CC \uCCB4\uB825\uC744 \uC62C\uB824\uC900\uB2E4."
+  itemDesc: "\uC0DD\uBA85\uB825 \uC804\uCCB4 \uD68C\uBCF5"
   itemIcon: {fileID: 927338625, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   baseDamage: 0
   baseCount: 0
@@ -29,3 +27,4 @@ MonoBehaviour:
   - 0
   counts: 0000000000000000000000000000000000000000
   projectile: {fileID: 0}
+  hand: {fileID: 0}

@@ -6,11 +6,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     [Header("Game Control")]
+    public bool isAlive;
     public float gameTime;
     public float maxGameTIme = 20f;
     [Header("Game Object")]
     public Player player;
     public PoolManager poolManager;
+    public LevelUp levelUpUI;
 
     [Header("player Info")]
     public int hp;
@@ -35,10 +37,19 @@ public class GameManager : MonoBehaviour
     private void Start() 
     {
         hp = maxHp;
+
+        // 임시 스크립트
+        levelUpUI.Select(0);
+    }
+
+    private void Awake() {
+        isAlive = true;
     }
 
     void Update()
     {
+        if(!isAlive)
+            return;
         gameTime += Time.deltaTime;
 
         if (gameTime > maxGameTIme)
@@ -51,10 +62,23 @@ public class GameManager : MonoBehaviour
     {
         exp++;
 
-        if(exp == levelUpExp[level])
+        if(exp == levelUpExp[Mathf.Min(level, levelUpExp.Length - 1)])
         {
             level++;
             exp = 0;
+            levelUpUI.Show();
         }
+    }
+
+    public void Pause()
+    {
+        isAlive = false;
+        Time.timeScale = 0f;
+    }
+
+    public void Resume()
+    {
+        isAlive = true;
+        Time.timeScale = 1f;
     }
 }

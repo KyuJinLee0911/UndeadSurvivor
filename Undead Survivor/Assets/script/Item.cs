@@ -12,6 +12,8 @@ public class Item : MonoBehaviour
 
     Image icon;
     Text textLevel;
+    Text textName;
+    Text textDesc;
 
     private void Awake()
     {
@@ -22,11 +24,32 @@ public class Item : MonoBehaviour
         Text[] texts = GetComponentsInChildren<Text>();
 
         textLevel = texts[0];
+        textName = texts[1];
+        textDesc = texts[2];
+        textName.text = itemData.itemName;
     }
 
-    private void LateUpdate()
+    private void OnEnable()
     {
-        textLevel.text = string.Format("Lv.{0:D2}", (itemLevel + 1));
+        textLevel.text = string.Format("Lv.{0:D2}", (itemLevel));
+
+        switch (itemData.itemType)
+        {
+            case ItemData.ItemType.Melee:
+            case ItemData.ItemType.Range:
+                textDesc.text = string.Format(itemData.itemDesc, itemData.damages[itemLevel] * 100, itemData.counts[itemLevel]);
+                break;
+
+            case ItemData.ItemType.Glove:
+            case ItemData.ItemType.Shoe:
+                textDesc.text = string.Format(itemData.itemDesc, itemData.damages[itemLevel] * 100);
+                break;
+
+            case ItemData.ItemType.Useable:
+                textDesc.text = string.Format(itemData.itemDesc);
+                break;
+        }
+
     }
 
     public void OnClick()
@@ -75,8 +98,6 @@ public class Item : MonoBehaviour
                 GameManager.Instance().hp = GameManager.Instance().maxHp;
                 break;
         }
-
-
 
         if (itemLevel == itemData.damages.Length)
         {
