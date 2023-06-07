@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     public Scanner scanner;
+    public Hand[] hands;
 
     // Start is called before the first frame update
     void Awake()
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+        hands = GetComponentsInChildren<Hand>(true);
     }
 
     // Update is called once per frame
