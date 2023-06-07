@@ -28,6 +28,9 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        if(!GameManager.Instance().isAlive)
+            return;
+            
         switch (id)
         {
             case 0: // 근접무기

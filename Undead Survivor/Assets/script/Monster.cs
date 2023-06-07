@@ -78,6 +78,9 @@ public class Monster : MonoBehaviour
     // 총알에 맞았을 때
     private void OnTriggerEnter2D(Collider2D other) 
     {
+        if(!GameManager.Instance().isAlive)
+            return;
+            
         if(!other.CompareTag("Bullet") || !isAlive)
             return;
 

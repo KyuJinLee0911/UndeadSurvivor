@@ -31,12 +31,16 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate() 
     {
+        if(!GameManager.Instance().isAlive)
+            return;
         Vector2 _nextVec = inputVec * speed * Time.fixedDeltaTime;
         playerRB.MovePosition(playerRB.position + _nextVec);
     }
 
     private void LateUpdate() 
     {
+        if(!GameManager.Instance().isAlive)
+            return;
         if(inputVec.x != 0)
         {   
             spriteRenderer.flipX = (inputVec.x < 0);

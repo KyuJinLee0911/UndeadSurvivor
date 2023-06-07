@@ -14,7 +14,8 @@ public class ItemData : ScriptableObject
     public ItemType itemType;
     public int itemId;
     public string itemName;
-    public string itemDisc; // Discription of item
+    [TextArea]
+    public string itemDesc; // Description of item
     public Sprite itemIcon;
 
     [Header("Level Data")]
