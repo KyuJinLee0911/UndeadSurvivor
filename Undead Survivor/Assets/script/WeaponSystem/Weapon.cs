@@ -13,8 +13,9 @@ public class Weapon : MonoBehaviour
 
     // 연사속도랑 회전속도가 똑같이 speed 변수를 쓰던걸 나눴는데 혹시 문제가 있는지 추후에 개발하면서 계속 체크할 것
     // 어차피 스크립트 내에서만 쓸거같아서 public -> private으로 바꿨음
-    private float fireSpeed; // 총알 연사속도
-    private float rotateSpeed; // 근접무기 회전속도
+    // 기어에서 문제가 생겨서 다시 public float speed로 바꿈
+
+    public float speed; // 총알 연사속도 혹은 근접무기 회전 속도
 
     private float timer;
     private Player player;
@@ -31,7 +32,7 @@ public class Weapon : MonoBehaviour
         {
             case 0: // 근접무기
                 // 플레이어를 중심으로 회전하도록
-                transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.forward * speed * Time.deltaTime);
                 break;
 
             default:
@@ -39,7 +40,7 @@ public class Weapon : MonoBehaviour
 
                 timer += Time.deltaTime;
 
-                if (timer > fireSpeed)
+                if (timer > speed)
                 {
                     timer = 0f;
                     Fire();
@@ -65,6 +66,8 @@ public class Weapon : MonoBehaviour
             default:
                 break;
         }
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     public void Init(ItemData data)
@@ -90,14 +93,16 @@ public class Weapon : MonoBehaviour
         switch (id)
         {
             case 0:
-                rotateSpeed = 150; // 회전속도
+                speed = 150; // 회전속도
                 ArrangeMelee();
                 break;
 
             default:
-                fireSpeed = 0.3f; // 연사속도
+                speed = 0.3f; // 연사속도
                 break;
         }
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     // 근접무기의 초기 배치 관련된 함수
