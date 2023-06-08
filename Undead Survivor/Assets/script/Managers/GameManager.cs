@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,14 +14,17 @@ public class GameManager : MonoBehaviour
     public Player player;
     public PoolManager poolManager;
     public LevelUp levelUpUI;
+    public Result uiResult;
+    public GameObject enemyCleaner;
 
     [Header("player Info")]
-    public int hp;
-    public int maxHp = 100;
+    public int playerId;
+    public float hp;
+    public float maxHp = 100;
     public int level;
     public int killCount;
     public int exp;
-    public int[] levelUpExp = { 10, 30, 60, 100, 150, 210, 280, 360, 450, 600};
+    public int[] levelUpExp = { 10, 30, 60, 100, 150, 210, 280, 360, 450, 600 };
     // 싱글톤 패턴
     public static GameManager Instance()
     {
@@ -34,35 +38,80 @@ public class GameManager : MonoBehaviour
         return _instance;
     }
 
-    private void Start() 
+    public void GameStart(int id)
     {
+        playerId = id;
         hp = maxHp;
 
-        // 임시 스크립트
-        levelUpUI.Select(0);
+        player.gameObject.SetActive(true);
+
+        levelUpUI.Select(playerId % 2);
+
+        Resume();
     }
 
-    private void Awake() {
-        isAlive = true;
+    public void GameOver()
+    {
+        StartCoroutine(GameOverRoutine());
+
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+        isAlive = false;
+        yield return new WaitForSeconds(0.5f);
+
+        uiResult.gameObject.SetActive(true);
+        uiResult.Lose();
+        Pause();
+        Time.timeScale = 1f;
+    }
+
+    public void GameVictory()
+    {
+        StartCoroutine(GameVictoryRoutine());
+    }
+
+    IEnumerator GameVictoryRoutine()
+    {
+        isAlive = false;
+        enemyCleaner.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        uiResult.gameObject.SetActive(true);
+        uiResult.Win();
+        Pause();
+        Time.timeScale = 1f;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void Update()
     {
-        if(!isAlive)
+        if (!isAlive)
             return;
         gameTime += Time.deltaTime;
 
         if (gameTime > maxGameTIme)
         {
             gameTime = maxGameTIme;
+            GameVictory();
+
         }
     }
 
     public void GetExp()
     {
+        if (!isAlive)
+            return;
+
         exp++;
 
-        if(exp == levelUpExp[Mathf.Min(level, levelUpExp.Length - 1)])
+        if (exp == levelUpExp[Mathf.Min(level, levelUpExp.Length - 1)])
         {
             level++;
             exp = 0;
