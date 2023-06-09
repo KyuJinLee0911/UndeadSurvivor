@@ -17,12 +17,16 @@ public class LevelUp : MonoBehaviour
         Next();
         rect.localScale = Vector3.one;
         GameManager.Instance().Pause();
+        AudioManager.Instance().PlaySfx(AudioManager.Sfx.LevelUp);
+        AudioManager.Instance().EffectBGM(true);
     }
 
     public void Hide()
     {
         rect.localScale = Vector3.zero;
         GameManager.Instance().Resume();
+        AudioManager.Instance().PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.Instance().EffectBGM(false);
     }
 
     public void Select(int index)
@@ -48,22 +52,22 @@ public class LevelUp : MonoBehaviour
             if (ran[0] != ran[1] && ran[1] != ran[2] && ran[0] != ran[2])
                 break;
         }
-        
+
         for (int index = 0; index < ran.Length; index++)
+        {
+            Item ranItem = items[ran[index]];
+
+            // 레벨이 최대인 아이템의 경우는 소비 아이템으로 대체
+            if (ranItem.itemLevel == ranItem.itemData.damages.Length)
             {
-                Item ranItem = items[ran[index]];
-
-                // 레벨이 최대인 아이템의 경우는 소비 아이템으로 대체
-                if (ranItem.itemLevel == ranItem.itemData.damages.Length)
-                {
-                    items[4].gameObject.SetActive(true);
-                }
-                else
-                {
-                    ranItem.gameObject.SetActive(true);
-                }
-
+                items[4].gameObject.SetActive(true);
             }
+            else
+            {
+                ranItem.gameObject.SetActive(true);
+            }
+
+        }
 
 
 
