@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         penetration = _penetration;
 
         // 관통력이 -1보다 클 경우, 총알의 속력은 방향 * 총알속도
-        if (penetration > -1)
+        if (penetration >= 0)
         {
             bulletRB.velocity = dir * bulletSpeed;
         }
@@ -31,16 +31,24 @@ public class Bullet : MonoBehaviour
     // 투사체가 몬스터에 맞을 때 관통력을 1씩 감소시키고, -1에 도달했을 때 비활성화
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Enemy") || penetration == -1)
+        if (!other.CompareTag("Enemy") || penetration == -100)
             return;
 
         penetration--;
 
-        if (penetration == -1)
+        if (penetration < 0)
         {
             bulletRB.velocity = Vector2.zero;
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag("Area") || penetration == -100)
+            return;
+
+        gameObject.SetActive(false);
     }
 
 

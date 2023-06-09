@@ -139,7 +139,7 @@ public class Weapon : MonoBehaviour
             _bulletTransform.Rotate(rotVec);
             _bulletTransform.Translate(_bulletTransform.up * 1.5f, Space.World);
             // 근접무기 생성 -> 근접무기는 내구도가 없음(관통력이 없음). 따라서 관통력 -1, 발사 방향이 따로 없으므로 Vector3.zero
-            _bulletTransform.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); // -1 is infinity penetration
+            _bulletTransform.GetComponent<Bullet>().Init(damage, -100, Vector3.zero); // -1 is infinity penetration
 
 
         }

@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
         return _instance;
     }
 
+    private void Awake() 
+    {
+        Application.targetFrameRate = 60;
+    }
+
     public void GameStart(int id)
     {
         playerId = id;
@@ -76,6 +81,11 @@ public class GameManager : MonoBehaviour
     public void GameVictory()
     {
         StartCoroutine(GameVictoryRoutine());
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
     }
 
     IEnumerator GameVictoryRoutine()
