@@ -28,9 +28,9 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(!GameManager.Instance().isAlive)
+        if (!GameManager.Instance().isAlive)
             return;
-            
+
         switch (id)
         {
             case 0: // 근접무기
@@ -54,7 +54,7 @@ public class Weapon : MonoBehaviour
 
     public void LevelUp(float _damage, int _count)
     {
-        damage = _damage *  Character.Damage;
+        damage = _damage * Character.Damage;
         count += _count;
 
         switch (id)
@@ -163,5 +163,7 @@ public class Weapon : MonoBehaviour
 
         // 총알 생성 -> 방향은 가장 가까운 몬스터를 향해, 여기서 count는 관통력
         _bulletTransform.GetComponent<Bullet>().Init(damage, count, _dir);
+
+        AudioManager.Instance().PlaySfx(AudioManager.Sfx.Range);
     }
 }

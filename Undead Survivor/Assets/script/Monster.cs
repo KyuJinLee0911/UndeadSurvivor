@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour
     Animator animator;
     public Rigidbody2D target;
     WaitForFixedUpdate wait;
-    
+
 
     bool isAlive;
     private Rigidbody2D monsterRB;
@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
 
-    private void Awake() 
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         monsterRB = GetComponent<Rigidbody2D>();
@@ -28,7 +28,7 @@ public class Monster : MonoBehaviour
         wait = new WaitForFixedUpdate();
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         target = GameManager.Instance().player.GetComponent<Rigidbody2D>();
         isAlive = true;
@@ -40,9 +40,9 @@ public class Monster : MonoBehaviour
         spriteRenderer.sortingOrder = 2;
         animator.SetBool("Dead", false);
     }
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
-        if(!isAlive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        if (!isAlive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
         // 살아있는 동안에 플레이어를 따라다니게 함
         Vector2 _dirVec = (target.position - monsterRB.position).normalized;
@@ -52,15 +52,15 @@ public class Monster : MonoBehaviour
         monsterRB.velocity = Vector2.zero;
     }
 
-    private void LateUpdate() 
+    private void LateUpdate()
     {
-        if(!isAlive)
+        if (!isAlive)
             return;
 
         // 살아있는 동안 캐릭터를 바라보게 함(좌우)
         Vector2 _nextDir = (target.position - monsterRB.position).normalized;
 
-        if(_nextDir.x == 0)
+        if (_nextDir.x == 0)
             return;
 
         spriteRenderer.flipX = (_nextDir.x < 0);
@@ -76,19 +76,20 @@ public class Monster : MonoBehaviour
     }
 
     // 총알에 맞았을 때
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(!other.CompareTag("Bullet") || !isAlive)
+        if (!other.CompareTag("Bullet") || !isAlive)
             return;
 
         monsterHP -= other.GetComponent<Bullet>().damage;
         StartCoroutine(KnockBack());
         // 체력이 0보다 크면 맞는 애니메이션
-        if(monsterHP > 0)
+        if (monsterHP > 0)
         {
             // Alive, hit action
             isAlive = true;
             animator.SetTrigger("Hit");
+            AudioManager.Instance().PlaySfx(AudioManager.Sfx.Hit);
         }
         // 체력이 0보다 작으면 죽음
         else
@@ -101,6 +102,9 @@ public class Monster : MonoBehaviour
             animator.SetBool("Dead", true);
             GameManager.Instance().killCount++;
             GameManager.Instance().GetExp();
+
+            if (GameManager.Instance().isAlive)
+                AudioManager.Instance().PlaySfx(AudioManager.Sfx.Dead);
         }
     }
 
@@ -114,7 +118,7 @@ public class Monster : MonoBehaviour
         monsterRB.AddForce(_dir * 3, ForceMode2D.Impulse);
     }
 
-    
+
 
     void Dead()
     {
